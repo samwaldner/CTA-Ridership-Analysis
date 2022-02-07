@@ -21,13 +21,13 @@ In addition to a variety of models, a wide variety of related features will be e
 * [`Gas Commodity Data`](https://finance.yahoo.com/quote/RB%3DF/historyperiod1=978307200&period2=1643673600&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true): Historical stock data ticker 'RB=F'
 * [`US Treasury Yield Curve`](https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics?data=yield): From US Department of the Treasury
 * [`Chicago Car Crash Data`](https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if): Tracks car crashes reported to police
-* [`Weekly Retail Gas Price Data`]https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=EMM_EPMRR_PTE_YORD_DPG&f=W): From US Energy Information Administration
+* [`Weekly Retail Gas Price Data`](https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=EMM_EPMRR_PTE_YORD_DPG&f=W): From US Energy Information Administration
 
 ### Folder Layout
 
 In this repository you'll find four folders: '0.0-prep_cleaning,' '1.0-merging,', '2.0-eda', and '3.0-modeling.' In this current folder you'll also find the pdf for my presentation.
 
-In the '0.0' folder you'll find a few notebooks containing inital examination of data and some very light cleaning for before the merging step. In here you'll also find a short web scraper used to download all the pdf files from the CATA website in order to compile all Chicago new car registration data. 
+In the '0.0' folder you'll find a few notebooks containing initial examination of data and some very light cleaning for before the merging step. In here you'll also find a short web scraper used to download all the pdf files from the CATA website in order to compile all Chicago new car registration data.
 
 In file '1.0' you'll find the heave lifting in terms of data cleaning. The daily file contains most of the cleaning with the weekly and monthly being derived in large part from that data with some new data added.
 
@@ -40,7 +40,7 @@ Finally, the '3.0' folder contains the code for the models run. You'll find arou
 | Feature                               | Type               | Description|
 |---------------------------------------|--------------------|------------|
 |bus                                     |float64| CTA bus ridership|
-|rail_boardings                          |float64| CTA "L" train ridership| 
+|rail_boardings                          |float64| CTA "L" train ridership|
 |total_rides                             |float64| CTA combined ridership|
 |prcp                                    |float64| All Chicago preciptation (rain,snow,etc.)|
 |tmax                                    |float64| Max temp|
@@ -98,11 +98,11 @@ Finally, the '3.0' folder contains the code for the models run. You'll find arou
 
 ## Executive Summary
 
-In this project we seek to explore the affect that COVID-19 had on CTA ridership and whether or not we can predict past the inital drop in ridership. To do this we will be using a varieyt of timeseries and regression models.
+In this project we seek to explore the affect that COVID-19 had on CTA ridership and whether or not we can predict past the initial drop in ridership. To do this we will be using a variety of timeseries and regression models.
 
-The first step was to collect all the necessary data. The CTA website provided the primary data on ridership, however, their data is not all up-to-date and is only updated rarely so cleaning and resampling the most up-to-date data into the form I needed was essential. A few methods were used to collect the other data used in this project. Most of it was open source provided by different government and eduactational bodies. One notable exception is the Chicago Automobile Trade Association who had all the data on Chicago new car registrations listed on their website in about one hundred fifty pdf files. To solve for this, I built a short web-scraper to go into their website and download all the pdf's for entry into a spreadsheet. Some of the data received from this website was corrupt or inaccurate so I imputed the mean of the surrounging cells into those NaN's.
+The first step was to collect all the necessary data. The CTA website provided the primary data on ridership, however, their data is not all up-to-date and is only updated rarely so cleaning and resampling the most up-to-date data into the form I needed was essential. A few methods were used to collect the other data used in this project. Most of it was open source provided by different government and educational bodies. One notable exception is the Chicago Automobile Trade Association who had all the data on Chicago new car registrations listed on their website in about one hundred fifty pdf files. To solve for this, I built a short web-scraper to go into their website and download all the pdf's for entry into a spreadsheet. Some of the data received from this website was corrupt or inaccurate so I imputed the mean of the surrounding cells into those NaN's.
 
-Once all the data was received, it had to be compiled into three separate final files at different dat/time levels: daily, weekly, monthly. The reason for this is to compare both model accuracy at different levels of time as well as practicality. For example, an average CTA rider won't have much of a use for monthly predictions on ridership, but a daily or weekly prediction of number of riders could lead to useful predictions on train delays. On the other hand monthly ridership predictions could be an invaluable resource in determining operating expenses of the CTA by the administration. But since historical data on ridership only goes back about 20 years, data loss was a huge concern for this project, so having a larger iteration of the same dataset could lead to very different results. 
+Once all the data was received, it had to be compiled into three separate final files at different dat/time levels: daily, weekly, monthly. The reason for this is to compare both model accuracy at different levels of time as well as practicality. For example, an average CTA rider won't have much of a use for monthly predictions on ridership, but a daily or weekly prediction of number of riders could lead to useful predictions on train delays. On the other hand monthly ridership predictions could be an invaluable resource in determining operating expenses of the CTA by the administration. But since historical data on ridership only goes back about 20 years, data loss was a huge concern for this project, so having a larger iteration of the same dataset could lead to very different results.
 
 ![](../capstone_data/imgs/dailyridership.png)
 
@@ -110,11 +110,11 @@ As we can see above the daily ridership for busses and trains is fairly consiste
 
 ![](../capstone_data/imgs/Linear-annual-lag.png)
 
-The first model was a Linear Time Series with a variety of lags included based on Autocorrelation and Partial Autocorrelation charts. As we can see it seems to fit to the data fine until the drop in ridership in which it has trouble adjusting. This was the throughline for this project. Models couldn't adjust for an extreme shock like the pandemic, despite some steps taken to help it improve.
+The first model was a Linear Time Series with a variety of lags included based on Autocorrelation and Partial Autocorrelation charts. As we can see it seems to fit to the data fine until the drop in ridership in which it has trouble adjusting. This was the through-line for this project. Models couldn't adjust for an extreme shock like the pandemic, despite some steps taken to help it improve.
 
 ![](../capstone_data/imgs/Prophetpredsdaily2.png)
 
-For example, one of the models tested was Facebook's Prophet model. While this model didn't score as well as some of the other's, especially at the monthly level, it was a flexible enough model where I could adjust seasonality and Holidays at a fairly granular level. The above plot shows the result of one of those tests, where I created a COVID on and off season to let the model know ahead of time to expect some volatility. As you can see, this had very modest success. The model recognized the seasonality, but, unfortunately, a season is a repeating even whereas this is a single massive shock so trying to game the system this way was not as succesful. Worth noting is doing a base Prophet model appeared to be extremely effective had the COVID drop not happened. It conformed very well to the subtle trends and seasonality in the training data, however it was this auto trend detection that led to its downfall.
+For example, one of the models tested was Facebook's Prophet model. While this model didn't score as well as some of the other's, especially at the monthly level, it was a flexible enough model where I could adjust seasonality and Holidays at a fairly granular level. The above plot shows the result of one of those tests, where I created a COVID on and off season to let the model know ahead of time to expect some volatility. As you can see, this had very modest success. The model recognized the seasonality, but, unfortunately, a season is a repeating even whereas this is a single massive shock so trying to game the system this way was not as successful. Worth noting is doing a base Prophet model appeared to be extremely effective had the COVID drop not happened. It conformed very well to the subtle trends and seasonality in the training data, however it was this auto trend detection that led to its downfall.
 
 
 ## Conclusions and Recommendations
@@ -132,7 +132,7 @@ For example, one of the models tested was Facebook's Prophet model. While this m
 | VAR                                   | 335,815.98         | AIC/BIC: 18.18  |
 | Prophet                               | 373,906.89         | MDAPE: .042     |
 | RandomForest                          | 358,914.75         | R2: 0.41, 0.35  |
-| LinearRegression                      | 371,335.56         | R2: 0.34 ,0.31  | 
+| LinearRegression                      | 371,335.56         | R2: 0.34 ,0.31  |
 | XGBoost                               | 358,299.85         | R2: 0.40, 0.36  |
 |                                       |                    |                 |
 
@@ -173,20 +173,20 @@ For example, one of the models tested was Facebook's Prophet model. While this m
 
 
 
-Above we can see the results of all the models at the differnt time levels. The timeseries models were built around their AIC scores while the Regressions around their R2 score as primary determination factor of efficacy. RMSE was the leveler and allowed for a convenient comparison across the board.
+Above we can see the results of all the models at the different time levels. The timeseries models were built around their AIC scores while the Regressions around their R2 score as primary determination factor of efficacy. RMSE was the leveler and allowed for a convenient comparison across the board.
 
 The most successful model was Vector Autoregressions by a long shot. This is due to the highly correlated nature between CTA Ridership and some of the other factors included in those models. However, for models with a single target value, The SARIMA models tended to perform the best followed very closely by the linear models which was an interesting and unexpected result. All ARIMA based models and regression models were tuned both manually and via GridSearch to find the best parameters.
 
-The most effective regresion model ended up being the XGBoostRegressor followed closely by RandomForest models. Unsruprisingly they were slightly overfit despite regurlarzation efforts, but other than at the monthly level, it was not by much. 
+The most effective regression model ended up being the XGBoostRegressor followed closely by RandomForest models. Unsurprisingly, they were slightly overfit despite regularization efforts, but other than at the monthly level, it was not by much.
 
 It seems clear from these results that at this time the TimeSeries forecasts are not accurate enough to be very practical for business or personal usage purposes. The sudden drop in ridership and the continued uncertainty around the COVID virus, as well as the status of travel and work, leads to a near impossible standard to predict to. Having said that, several of these models did a fine job forecasting around the drop, just not through it. Special attention was paid to how the training and testing sets were split. The model that were split before the pandemic failed to adjust to the drop, while the models that were split on or near the pandemic had trouble recovering from the drop.
 
-The best predictions came at the weekly level. This makes sense considering the percentage of data lost to the monthly resample. The data in monthly was just too generalized to be very effeictve in modeling and the opposite can be said for the daily data. The weekly showed decent bias/variance tradeoff and some of the regressions were salvageable. It could be a useful tool at some point in the future to hone further in on the regression variable of value for general predictions.
+The best predictions came at the weekly level. This makes sense considering the percentage of data lost to the monthly resample. The data in monthly was just too generalized to be very effective in modeling and the opposite can be said for the daily data. The weekly showed decent bias/variance tradeoff and some of the regressions were salvageable. It could be a useful tool at some point in the future to hone further in on the regression variable of value for general predictions.
 
-When continuing work on this project here are a few things that can be impoved.
+When continuing work on this project here are a few things that can be improved:
 
 1. Although the Prophet model didn't generalize to the pandemic very well, with more time spent creating customer holidays to indicate a one-time event, I believe it could perform even more impressively.
-2. More data is needed. CTA will hopefully continue to update their datasets and at some point more data will have huge impact on accuacy of forecasts.
-3. I was able to make a few ineracitve forecast charts that would be great in an app or connected to GoogleMaps to help predict how busy the CTA is at that time. Similar to the existing function they have for restaurants.
+2. More data is needed. CTA will hopefully continue to update their datasets and at some point more data will have huge impact on accuracy of forecasts.
+3. I was able to make a few interactive forecast charts that would be great in an app or connected to GoogleMaps to help predict how busy the CTA is at that time. Similar to the existing function they have for restaurants.
 
 ## Citations
