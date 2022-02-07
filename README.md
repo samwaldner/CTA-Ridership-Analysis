@@ -6,7 +6,7 @@ CTA (Chicago Transit Authority) ridership levels have dramatically changed in th
 
 ## Background
 
-The Chicago Transit Authority (CTA) operates the nation’s second largest public transportation system. On an average weekday, 1.6 million rides are taken on CTA.[`source`](https://www.transitchicago.com/facts/) With such large ridership numbers and a proposed 2022 operating budget of \\$1.75 billion, it is critical that bother riders and administrators have a good understanding of the trends and expectations for what ridership will look like in the future.
+The Chicago Transit Authority (CTA) operates the nation’s second largest public transportation system. On an average weekday, 1.6 million rides are taken on CTA.[`source`](https://www.transitchicago.com/facts/) With such large ridership numbers and a proposed 2022 operating budget of \$1.75 billion, it is critical that bother riders and administrators have a good understanding of the trends and expectations for what ridership will look like in the future.
 
 In addition to a variety of models, a wide variety of related features will be examined as well to help adjust for the shock to the to CTA ridership levels due to COVID. Included in these features are such notable values as: Treasury Yield Curve Rates, weather, government COVID restriction indicators, vaccination rates, and new car registrations. These factors are believed to be related to ridership levels, and should influence positively the accuracy of our regression and Vector autoregression (VAR) models.
 
@@ -190,3 +190,21 @@ When continuing work on this project here are a few things that can be improved:
 3. I was able to make a few interactive forecast charts that would be great in an app or connected to GoogleMaps to help predict how busy the CTA is at that time. Similar to the existing function they have for restaurants.
 
 ## Citations
+
+- Authority, Chicago Transit. “CTA - Ridership - Daily Boarding Totals: City of Chicago: Data Portal.” Chicago Data Portal, 28 Jan. 2022, https://data.cityofchicago.org/Transportation/CTA-Ridership-Daily-Boarding-Totals/6iiy-9s97. 
+
+- Chicago, City of. “Covid-19 Daily Vaccinations - Chicago Residents: City of Chicago: Data Portal.” Chicago Data Portal, 7 Feb. 2022, https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Vaccinations-Chicago-Residents/2vhs-cf6b. 
+
+- Chicago, City of. “Traffic Crashes - Crashes: City of Chicago: Data Portal.” Chicago Data Portal, 6 Feb. 2022, https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if. 
+
+- Hale, Thomas, Sam Webster, Anna Petherick, Toby Phillips, and Beatriz Kira (2020). Oxford COVID-19 Government Response Tracker, Blavatnik School of Government. Data use policy: Creative Commons Attribution CC BY standard.
+
+- “National Centers for Environmental Information.” National Centers for Environmental Information (NCEI), https://www.ncei.noaa.gov/. 
+
+- “News.” Cata, http://www.cata.info/news/?CategoryId=4. 
+
+- “RBOB Gasoline Mar 22 (RB=F) Stock Historical Prices &amp; Data.” Yahoo! Finance, Yahoo!, 7 Feb. 2022, https://finance.yahoo.com/quote/RB%3DF/history?p=RB%3DF. 
+
+- U.S. Department of the Treasury, https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&amp;field_tdr_date_value_month=202202. 
+
+- Weekly Chicago, IL Regular Reformulated Retail Gasoline Prices (Dollars per Gallon), https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&amp;s=EMM_EPMRR_PTE_YORD_DPG&amp;f=W. 
